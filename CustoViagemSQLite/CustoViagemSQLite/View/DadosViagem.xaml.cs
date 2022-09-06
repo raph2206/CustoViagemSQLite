@@ -113,5 +113,17 @@ namespace CustoViagemSQLite.View
                 DisplayAlert("Ooops", ex.Message, "OK");
             }
         }
+
+        private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            try
+            {
+                Navigation.PushAsync(new ListaViagens());
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Ooops", ex.Message, "OK");
+            }
+        }
     }
 }
