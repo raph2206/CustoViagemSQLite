@@ -17,6 +17,8 @@ namespace AppMercadin.Helper
             _connection = new SQLiteAsyncConnection(path);
 
             _connection.CreateTableAsync<Pedagio>().Wait();
+
+            _connection.CreateTableAsync<Viagem>().Wait();
         }
 
         public Task<int> Insert(Pedagio p)
@@ -46,5 +48,34 @@ namespace AppMercadin.Helper
 
             return _connection.QueryAsync<Pedagio>(sql);
         }
+
+        public Task<int> InsertV(Viagem v)
+        {
+            return _connection.InsertAsync(v);
+        }
+
+        public Task<List<Viagem>> UpdateV(Viagem v)
+        {
+            string sql = "UPDATE Pedagio SET Origem=?, Destino=?, Preco_Combustivel=?, Consumo=?, Distancia=? WHERE id= ? ";
+            return _connection.QueryAsync<Viagem>(sql, v.Distancia, v.Consumo, v.Preco_Combustivel,  v.Destino, v.Origem, v.Id);
+        }
+
+        public Task<List<Viagem>> GetAllV()
+        {
+            return _connection.Table<Viagem>().ToListAsync();
+        }
+
+        public Task<int> DeleteV(int id)
+        {
+            return _connection.Table<Viagem>().DeleteAsync(i => i.Id == id);
+        }
+
+        public Task<List<Viagem>> SearchV(string q)
+        {
+            string sql = "SELECT * FROM Viagem WHERE Id LIKE '%" + q + "%' ";
+
+            return _connection.QueryAsync<Viagem>(sql);
+        }
+
     }
 }

@@ -125,5 +125,31 @@ namespace CustoViagemSQLite.View
                 DisplayAlert("Ooops", ex.Message, "OK");
             }
         }
-    }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                PropriedadesApp.ArrayViagem.Add(new Viagem()
+                {
+                    Id = PropriedadesApp.ArrayPedagios.Count + 1,
+                    Origem = txt_localizacao.Text,
+                    Destino = txt_destino.Text,
+                    Distancia = Convert.ToDouble(txt_distancia.Text.Replace(".", ",")),
+                    Consumo = Convert.ToDouble(txt_consumo.Text.Replace(".", ",")),
+                    Preco_Combustivel = Convert.ToDouble(txt_preco_combustivel.Text.Replace(".", ","))
+                });
+
+                DisplayAlert("Deu Certo!", "Pedágio Adicionado com Sucesso!", "OK");
+
+                txt_localizacao.Text = string.Empty;
+                txt_preco_pedagio.Text = "";
+            }
+
+            catch (Exception ex)
+            {
+                DisplayAlert("Ooops", ex.Message, "OK");
+            }
+        }
+        }
 }

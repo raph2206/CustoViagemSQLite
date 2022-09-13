@@ -14,6 +14,7 @@ namespace CustoViagemSQLite
     public partial class App : Application
     {
         public List<Pedagio> ArrayPedagios = new List<Pedagio>();
+        public List<Viagem> ArrayViagem = new List<Viagem>();
 
         public App()
         {
